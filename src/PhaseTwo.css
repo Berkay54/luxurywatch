@@ -1,0 +1,56 @@
+/* Phase 2 only. The approved hero remains unchanged. */
+.phase-two { color: var(--text); background: var(--background); overflow: clip; }
+.cinematic-scene { position: relative; isolation: isolate; }
+.scene-editorial { position: relative; padding-left: 7.7vw; padding-right: 20px; }
+.scene-label { margin: 0 0 36px; color: var(--secondary); font: 400 10px/1.6 var(--sans); letter-spacing: .18em; }
+.scene-label span { margin-inline: 8px; }
+.phase-two h2 { margin: 0; font-family: var(--display); font-weight: 400; letter-spacing: -.035em; }
+.scene-copy { max-width: 320px; margin: 36px 0 0 5px; color: var(--secondary); font: 400 14px/1.85 var(--sans); }
+.skeleton-scene { min-height: clamp(620px, 55vw, 920px); margin-top: 0; display: flex; align-items: center; }
+.cinematic-film { position: absolute; z-index: -1; pointer-events: none; }
+.cinematic-film video { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cinematic-film-skeleton { right: -4%; top: 0; width: 85%; height: 100%; }
+.cinematic-film-skeleton video { object-position: 0% 50%; }
+.cinematic-film-skeleton::after { content: ''; position: absolute; inset: 0; background:
+  linear-gradient(to right, #010102, rgb(1 1 2 / .55) 2%, rgb(1 1 2 / .12) 7%, rgb(1 1 2 / .02) 14%, rgb(1 1 2 / 0) 23%),
+  linear-gradient(to left, #010102, rgb(1 1 2 / .25) 1%, rgb(1 1 2 / .04) 5%, rgb(1 1 2 / 0) 12%),
+  linear-gradient(to bottom, #010102, rgb(1 1 2 / .18) 1%, rgb(1 1 2 / .03) 4%, rgb(1 1 2 / 0) 9%),
+  linear-gradient(to top, #010102, rgb(1 1 2 / .15) 1%, rgb(1 1 2 / .02) 5%, rgb(1 1 2 / 0) 12%); }
+.skeleton-editorial { width: 39%; padding-block: 55px; }
+.skeleton-editorial h2 { font-size: clamp(43px, 4.35vw, 78px); line-height: .98; }
+.skeleton-editorial h2 span { display: inline-block; margin-left: .15em; }
+.skeleton-editorial .scene-copy { max-width: 260px; }
+.cinematic-fallback { position: absolute; inset: 0; display: grid; place-items: center; background: var(--background); color: var(--secondary); font: 400 24px var(--display); }
+.precision-rail { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0 7.7vw 80px; padding-block: 36px; border-block: 1px solid rgb(196 198 199 / .14); }
+.precision-spec { display: flex; flex-direction: column; gap: 17px; padding-inline: 35px; border-left: 1px solid rgb(196 198 199 / .12); }
+.precision-spec:first-child { border-left: 0; padding-left: 0; }
+.precision-spec dd { margin: 0; font: 400 clamp(38px, 3.9vw, 64px)/1 var(--display); letter-spacing: -.02em; font-variant-numeric: lining-nums tabular-nums; }
+.precision-spec dt { order: 2; color: var(--secondary); font: 400 9px/1.6 var(--sans); letter-spacing: .15em; }
+@media (max-width: 1023px) {
+  .scene-editorial { padding-left: 6vw; }
+  .scene-copy { max-width: 245px; font-size: 13px; }
+  .skeleton-scene { min-height: 530px; }
+  .skeleton-editorial { width: 43%; }
+  .skeleton-editorial h2 { font-size: clamp(35px, 4.5vw, 46px); }
+  .precision-rail { margin-inline: 6vw; }
+  .precision-spec { padding-inline: 20px; }
+  .precision-spec dt { font-size: 8px; }
+}
+@media (max-width: 700px) {
+  .scene-editorial { padding-inline: 7vw; }
+  .scene-label { margin-bottom: 30px; font-size: 9px; }
+  .skeleton-scene { min-height: 620px; display: block; }
+  .skeleton-editorial { width: 100%; padding-top: 24px; padding-bottom: 0; z-index: 1; }
+  .skeleton-editorial .scene-label { margin-bottom: 24px; }
+  .skeleton-editorial h2 { font-size: clamp(37px, 10.3vw, 64px); }
+  .skeleton-editorial .scene-copy { max-width: 230px; margin-top: 24px; }
+  /* The statement occupies the top negative space of one continuous scene;
+     the watch begins behind its lower edge, rather than in a separate block. */
+  .cinematic-film-skeleton { right: -8%; top: 126px; width: 112%; height: 424px; }
+  .cinematic-film-skeleton video { object-position: 65% 50%; }
+  .skeleton-editorial .scene-copy { position: absolute; top: 565px; left: 7vw; margin: 0; max-width: 270px; }
+  .precision-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 8px 7vw 60px; padding-block: 30px; row-gap: 34px; }
+  .precision-spec { padding-inline: 20px; gap: 12px; }
+  .precision-spec:nth-child(3) { padding-left: 0; border-left: 0; }
+  .precision-spec dd { font-size: 40px; }
+}

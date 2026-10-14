@@ -1,0 +1,114 @@
+﻿{
+    "version":  1,
+    "project":  {
+                    "name":  "luxury-watch",
+                    "productType":  "luxury mechanical watch brand, phases 1 and 2",
+                    "stack":  [
+                                  "react",
+                                  "vite"
+                              ]
+                },
+    "sources":  {
+                    "tokens":  [
+                                   "src/index.css",
+                                   "src/app.css"
+                               ],
+                    "components":  [
+
+                                   ],
+                    "assets":  [
+                                   "src/assets"
+                               ],
+                    "instructions":  [
+
+                                     ]
+                },
+    "design":  {
+                   "colorMode":  "dark",
+                   "colors":  {
+                                  "--background":  {
+                                                       "value":  "#010102",
+                                                       "source":  "src/index.css"
+                                                   },
+                                  "--secondary":  {
+                                                      "value":  "#a7a6a2",
+                                                      "source":  "src/index.css"
+                                                  }
+                              },
+                   "typography":  {
+                                      "--text":  {
+                                                     "value":  "#f1efea",
+                                                     "source":  "src/index.css"
+                                                 }
+                                  },
+                   "spacing":  {
+
+                               },
+                   "radius":  {
+
+                              },
+                   "shadows":  {
+
+                               },
+                   "motion":  {
+
+                              },
+                   "density":  "sparse"
+               },
+    "components":  {
+                       "installed":  [
+
+                                     ],
+                       "preferredPrimitives":  [
+
+                                               ],
+                       "patterns":  [
+
+                                    ]
+                   },
+    "constraints":  {
+                        "must":  [
+                                     "Preserve approved hero exactly",
+                                     "Render skeleton video only in Phase 2",
+                                     "Maintain #010102 environment",
+                                     "Respect reduced motion"
+                                 ],
+                        "avoid":  [
+                                      "Philosophy section or oversized imprint",
+                                      "Gold video, macro still, placeholders",
+                                      "Cards, scroll effects or unnecessary gaps",
+                                      "Additional sections"
+                                  ]
+                    },
+    "decisions":  [
+                      "Phase 1 hero is approved, locked and unchanged",
+                      "Phase 2 contains only 01 — THE MOVEMENT and the specification rail",
+                      "Movement begins directly after hero with no gap",
+                      "85 percent desktop video canvas with full-height crop and natural negative space for typography",
+                      "Only skeleton video rendered; autoplay muted loop inline, reduced motion paused frame",
+                      "Philosophy section and all associated styles removed"
+                  ],
+    "evidence":  [
+                     {
+                         "fact":  "design.colorMode:dark",
+                         "source":  "src/index.css, src/app.css"
+                     },
+                     {
+                         "fact":  "design.tokens",
+                         "source":  "src/app.css"
+                     },
+                     {
+                         "fact":  "design.tokens",
+                         "source":  "src/index.css"
+                     },
+                     {
+                         "fact":  "project.stack:react",
+                         "source":  "package.json"
+                     },
+                     {
+                         "fact":  "project.stack:vite",
+                         "source":  "package.json"
+                     }
+                 ],
+    "generatedAt":  "2026-10-14T18:59:20.626Z"
+}
