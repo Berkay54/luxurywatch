@@ -2,7 +2,7 @@
 import './App.css'
 import PhaseTwo from './PhaseTwo'
 
-// Working brand and future destinations are centralized for easy replacement.
+// Brand identity and the completed site's section labels.
 const brand = { name: 'VÉRON', navigation: ['COLLECTION', 'MOVEMENT', 'ATELIER', 'CONTACT'] }
 
 function WatchFilm() {
@@ -40,8 +40,6 @@ function WatchFilm() {
 }
 
 function App() {
-  const [notice, setNotice] = useState('')
-  const previewDestination = (name: string) => setNotice(`${name} will be unveiled in a future release.`)
   return (
     <div className="site-shell">
       <a className="skip-link" href="#main">Skip to content</a>
@@ -49,8 +47,8 @@ function App() {
         <a className="wordmark" href="/" aria-label={`${brand.name} home`}>{brand.name}</a>
         <nav aria-label="Main navigation">
           {brand.navigation.map((item) => (
-            <button key={item} type="button" aria-disabled="true" title="Available in a future release"
-              onClick={() => previewDestination(item.charAt(0) + item.slice(1).toLowerCase())}>{item}</button>
+            <a key={item} href={item === 'CONTACT' ? '#closing-notes' : `#${item.toLowerCase()}`}
+              onClick={item === 'CONTACT' ? () => window.dispatchEvent(new Event('veron:contact')) : undefined}>{item}</a>
           ))}
         </nav>
       </header>
@@ -64,10 +62,9 @@ function App() {
           </h1>
           <div className="hero-details">
             <p className="supporting-copy">Mechanical excellence<br />beneath the surface.</p>
-            <button className="collection-link" type="button" aria-disabled="true" title="Collection available in a future release" onClick={() => previewDestination('The collection')}>
+            <a className="collection-link" href="#collection">
               <span>EXPLORE COLLECTION</span><span className="cta-arrow" aria-hidden="true">⟶</span>
-            </button>
-            <p className="destination-notice" role="status">{notice}</p>
+            </a>
           </div>
         </div>
       </main>

@@ -1,0 +1,60 @@
+﻿/* Brand closing: flat type, one reveal, no media and no shared selectors. */
+.closing-chapter { position: relative; isolation: isolate; overflow: clip; color: var(--text); background: var(--background); }
+.closing-statement { position: relative; min-height: 760px; height: 100svh; max-height: 1300px; }
+.closing-index { position: absolute; top: 6%; left: 7.7%; margin: 0; color: var(--secondary); font: 400 9px/1.6 var(--sans); letter-spacing: .18em; }
+.closing-index > span { margin-inline: 10px; }
+.closing-title { position: absolute; inset: 20% 7.7% auto; margin: 0; font: 400 clamp(130px, 19vw, 380px)/.78 var(--display); letter-spacing: -.045em; }
+.closing-line { display: block; overflow: clip; padding-bottom: .16em; }
+.closing-line:first-child { margin-left: 12%; }
+.closing-line > span { display: block; transform-origin: left center; }
+.closing-philosophy { position: absolute; right: 13%; bottom: 17%; margin: 0; color: var(--secondary); font: 400 12px/1.9 var(--sans); letter-spacing: .015em; }
+.closing-identity { display: flex; align-items: center; justify-content: space-between; gap: 45px; padding: 18px 7.7% 65px; }
+.closing-wordmark { margin: 0 0 22px; font: 400 45px/1 var(--display); letter-spacing: .16em; }
+.closing-origin { margin: 0; color: var(--silver); font: 400 8px/1.6 var(--sans); letter-spacing: .16em; }
+.closing-discipline { margin: 8px 0 0; color: var(--secondary); font: 400 7px/1.6 var(--sans); letter-spacing: .15em; }
+.closing-navigation { display: flex; gap: clamp(22px, 3.5vw, 65px); }
+.closing-chapter a { display: inline-block; padding-block: 16px; color: var(--secondary); font: 400 9px/1.5 var(--sans); letter-spacing: .16em; transition: color 200ms ease; }
+.closing-chapter a:hover { color: var(--text); }
+.closing-chapter a:focus-visible { outline: 1px solid var(--silver); outline-offset: 5px; }
+.closing-footer { margin-inline: 7.7%; padding-top: 10px; border-top: 1px solid rgb(196 198 199 / .2); }
+.closing-footer-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; color: var(--secondary); font: 400 8px/1.6 var(--sans); letter-spacing: .14em; }
+.closing-footer-row > p { margin: 0; }
+.closing-footer-row nav { display: flex; gap: 30px; }
+.closing-footer-row a { font-size: 7px; }
+.closing-notes { min-height: 2.8em; max-width: 650px; margin: 10px 0 22px; color: var(--secondary); font: 400 10px/1.6 var(--sans); }
+.closing-notes:focus-visible { outline: 1px solid var(--silver); outline-offset: 5px; }
+/* The line wrappers hold the original geometry while their contents resolve.
+   Final transforms are removed completely for crisp, stationary type. */
+.closing-ready .closing-line > span { clip-path: inset(100% 0 0); transform: translateY(30px) scale(1.02); transition: clip-path 1050ms cubic-bezier(.19,.65,.25,1), transform 1050ms cubic-bezier(.19,.65,.25,1); }
+.closing-entered .closing-line > span { clip-path: inset(0); transform: none; }
+.closing-ready .closing-line:nth-child(2) > span { transition-delay: 160ms; }
+@media (max-width: 1023px) and (min-width: 701px) {
+  .closing-statement { min-height: 660px; height: 85svh; }
+  .closing-index { left: 6%; }
+  .closing-title { inset-inline: 6%; top: 24%; }
+  .closing-philosophy { right: 9%; bottom: 16%; }
+  .closing-identity { padding-inline: 6%; align-items: flex-start; }
+  .closing-navigation { display: grid; grid-template-columns: repeat(2, auto); column-gap: 40px; row-gap: 2px; }
+  .closing-footer { margin-inline: 6%; }
+}
+@media (max-width: 700px) {
+  .closing-statement { min-height: 0; height: auto; max-height: none; padding: 30px 7vw 55px; }
+  .closing-index { position: static; font-size: 8px; }
+  .closing-title { position: relative; inset: auto; margin: 65px 0 0; font-size: 21vw; line-height: .82; }
+  .closing-line:first-child { margin-left: 4%; }
+  .closing-line:nth-child(2) { margin-left: 17%; }
+  .closing-line { padding-bottom: .15em; }
+  .closing-philosophy { position: static; margin: 40px 0 0 5%; font-size: 11px; }
+  .closing-identity { display: grid; gap: 30px; padding: 15px 7vw 35px; }
+  .closing-wordmark { font-size: 36px; margin-bottom: 18px; }
+  .closing-navigation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 35px; }
+  .closing-chapter a { font-size: 8px; min-height: 44px; }
+  .closing-footer { margin-inline: 7%; }
+  .closing-footer-row { flex-wrap: wrap; gap: 6px 20px; font-size: 7px; }
+  .closing-footer-row nav { margin-left: auto; gap: 22px; }
+  .closing-footer-row a { font-size: 6px; }
+  .closing-notes { margin-top: 15px; min-height: 4.8em; font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .closing-chapter .closing-line > span { clip-path: none; transform: none; transition: none; }
+}

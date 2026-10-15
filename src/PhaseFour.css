@@ -1,0 +1,85 @@
+﻿/* Atelier owns every selector; the three approved chapters remain isolated. */
+.atelier-region { position: relative; background: var(--background); color: var(--text); }
+.atelier-sticky { height: 300svh; }
+.atelier-stage { position: sticky; top: 0; height: 100svh; min-height: 650px; overflow: clip; isolation: isolate; }
+.atelier-introduction { position: absolute; z-index: 4; left: 7.7%; top: 5%; pointer-events: none; }
+.atelier-kicker { margin: 0 0 5.5vh; color: var(--secondary); font: 400 9px/1.6 var(--sans); letter-spacing: .18em; }
+.atelier-kicker > span { margin-inline: 10px; }
+.atelier-introduction h2 { margin: 0; font: 400 clamp(58px, 5.7vw, 112px)/.88 var(--display); letter-spacing: -.035em; }
+.atelier-introduction h2 > span { margin-left: .25em; }
+.atelier-intro-copy { margin: 24px 0 0; color: var(--secondary); font: 400 10px/1.9 var(--sans); }
+.atelier-frame { position: absolute; inset: 0; isolation: isolate; }
+.atelier-photograph { position: absolute; z-index: 1; inset: 12% -8% 8% 27%; mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent), linear-gradient(to bottom, transparent, #000 12%, #000 80%, transparent); mask-composite: intersect; }
+.atelier-photograph img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; }
+.atelier-frame-1 .atelier-photograph img { object-position: 44% 50%; }
+.atelier-frame-2 .atelier-photograph img { object-position: 50% 50%; }
+.atelier-architectural { position: absolute; z-index: 0; left: 24%; bottom: 13%; color: #3a3d3c; font: 400 clamp(88px, 11vw, 210px)/1 var(--display); letter-spacing: -.045em; }
+.atelier-scene-heading { position: absolute; z-index: 3; left: 7.7%; top: 58%; display: flex; align-items: baseline; gap: 20px; }
+.atelier-scene-heading > span { color: var(--secondary); font: 400 9px var(--sans); letter-spacing: .15em; }
+.atelier-scene-heading h3 { margin: 0; font: 400 16px/1.4 var(--sans); letter-spacing: .12em; }
+.atelier-scene-copy { position: absolute; z-index: 3; left: 7.7%; top: 63%; max-width: 240px; margin: 0; white-space: pre-line; color: var(--secondary); font: 400 12px/1.9 var(--sans); }
+.atelier-data { position: absolute; z-index: 3; left: 35%; right: 7.7%; bottom: 8%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding-top: 20px; border-top: 1px solid rgb(196 198 199 / .25); }
+.atelier-data > div { display: flex; flex-direction: column; gap: 10px; }
+.atelier-data dt { order: 2; color: var(--secondary); font: 400 7px/1.6 var(--sans); letter-spacing: .15em; }
+.atelier-data dd { margin: 0; font: 400 clamp(16px, 1.55vw, 29px)/1.2 var(--display); }
+.atelier-plate { position: absolute; z-index: 3; right: 7.7%; bottom: 3%; color: var(--secondary); font: 400 7px/1.5 var(--sans); letter-spacing: .17em; }
+.atelier-measure { position: absolute; z-index: 2; right: 12%; top: 57%; display: flex; align-items: center; color: var(--silver); font: 400 7px var(--sans); letter-spacing: .12em; }
+.atelier-measure-point { width: 5px; height: 5px; border: 1px solid var(--silver); border-radius: 50%; }
+.atelier-measure-rule { width: clamp(40px, 7vw, 120px); margin-right: 10px; border-top: 1px solid rgb(196 198 199 / .5); transform-origin: left center; transform: rotate(-15deg); }
+.atelier-frame-1 .atelier-measure { right: 30%; top: 55%; }
+.atelier-frame-2 .atelier-measure { right: 27%; top: 48%; }
+.atelier-progress { position: absolute; z-index: 5; top: 5.5%; right: 7.7%; display: flex; gap: 28px; }
+.atelier-progress > span { display: flex; align-items: baseline; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid #292c2b; color: var(--secondary); font: 400 8px var(--sans); letter-spacing: .12em; }
+.atelier-progress > span > span { font-size: 7px; }
+.atelier-progress > .atelier-progress-current { color: var(--text); border-color: var(--silver); }
+.atelier-scroll-note { position: absolute; z-index: 4; left: 7.7%; bottom: 8%; display: flex; align-items: center; gap: 25px; margin: 0; color: var(--secondary); font: 400 7px/1.5 var(--sans); letter-spacing: .16em; }
+.atelier-scroll-note > span { font-size: 19px; }
+.atelier-image-error { position: absolute; inset: 30% 10%; display: grid; place-items: center; color: var(--secondary); font: 400 14px var(--sans); }
+.atelier-accessible, .atelier-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* Scroll selects a scene; these independent timelines do the movement. */
+.atelier-forward { --atelier-enter-mask: polygon(0 0, 100% 0, 100% -15%, 0 0); --atelier-exit-mask: polygon(0 100%, 100% 115%, 100% 100%, 0 100%); }
+.atelier-backward { --atelier-enter-mask: polygon(0 115%, 100% 100%, 100% 100%, 0 100%); --atelier-exit-mask: polygon(0 0, 100% 0, 100% -15%, 0 0); }
+.atelier-outgoing .atelier-photograph { animation: atelier-photo-out 650ms cubic-bezier(.4,0,.65,1) both; }
+.atelier-incoming .atelier-photograph { animation: atelier-photo-in 800ms 100ms cubic-bezier(.19,.65,.25,1) both; }
+@keyframes atelier-photo-out { from { opacity: 1; transform: none; clip-path: polygon(0 0,100% 0,100% 100%,0 100%); } to { opacity: 0; transform: translateY(-6px) scale(1.025); clip-path: var(--atelier-exit-mask); } }
+@keyframes atelier-photo-in { from { opacity: 0; transform: translateY(16px) scale(.98); clip-path: var(--atelier-enter-mask); } 45% { opacity: .8; } to { opacity: 1; transform: none; clip-path: polygon(0 0,100% 0,100% 100%,0 100%); } }
+.atelier-outgoing .atelier-scene-heading, .atelier-outgoing .atelier-scene-copy, .atelier-outgoing .atelier-data, .atelier-outgoing .atelier-architectural, .atelier-outgoing .atelier-measure, .atelier-outgoing .atelier-plate { animation: atelier-copy-out 280ms ease both; }
+.atelier-incoming .atelier-architectural { animation: atelier-copy-in 650ms 100ms cubic-bezier(.22,.61,.36,1) both; }
+.atelier-incoming .atelier-scene-heading, .atelier-incoming .atelier-scene-copy { animation: atelier-copy-in 520ms 260ms cubic-bezier(.22,.61,.36,1) both; }
+.atelier-incoming .atelier-data, .atelier-incoming .atelier-measure, .atelier-incoming .atelier-plate { animation: atelier-copy-in 500ms 390ms cubic-bezier(.22,.61,.36,1) both; }
+@keyframes atelier-copy-out { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes atelier-copy-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+/* Tablet, short viewports and reduced motion use the same composed sequence.
+   The photographs retain their own crops and never become framed cards. */
+.atelier-sequence { overflow: clip; padding: 30px 7vw 55px; }
+.atelier-sequence .atelier-introduction { position: relative; inset: auto; z-index: 4; }
+.atelier-sequence .atelier-kicker { margin-bottom: 35px; }
+.atelier-sequence .atelier-introduction h2 { font-size: clamp(48px, 9vw, 90px); }
+.atelier-sequence .atelier-intro-copy { max-width: 280px; font-size: 11px; margin-top: 22px; }
+.atelier-sequence .atelier-frame { position: relative; inset: auto; min-height: 620px; height: 78svh; max-height: 900px; margin-inline: -7vw; }
+.atelier-sequence .atelier-frame:first-of-type { margin-top: 0; }
+.atelier-sequence .atelier-photograph { inset: 6% -10% 19% 5%; mask-image: linear-gradient(to right,transparent,#000 12%,#000 85%,transparent),linear-gradient(to bottom,transparent,#000 15%,#000 76%,transparent); }
+.atelier-sequence .atelier-photograph img { object-position: 92% 50%; }
+.atelier-sequence .atelier-frame-1 .atelier-photograph img { object-position: 42% 50%; }
+.atelier-sequence .atelier-frame-2 .atelier-photograph img { object-position: 51% 50%; }
+.atelier-sequence .atelier-architectural { font-size: 15vw; left: 7%; bottom: 15%; }
+.atelier-sequence .atelier-scene-heading { top: 4%; left: 7%; }
+.atelier-sequence .atelier-scene-heading h3 { font-size: 12px; }
+.atelier-sequence .atelier-scene-copy { left: 7%; top: auto; bottom: 21%; max-width: 240px; font-size: 11px; }
+.atelier-sequence .atelier-data { left: 7%; right: 7%; bottom: 6%; gap: 15px; padding-top: 16px; }
+.atelier-sequence .atelier-data dd { font-size: clamp(14px, 3vw, 24px); }
+.atelier-sequence .atelier-data dt { font-size: 6px; letter-spacing: .1em; }
+.atelier-sequence .atelier-plate { bottom: 1%; right: 7%; font-size: 6px; }
+.atelier-sequence .atelier-measure { top: 41%; right: 6%; }
+.atelier-sequence .atelier-frame-1 .atelier-measure { right: 16%; top: 43%; }
+.atelier-sequence .atelier-frame-2 .atelier-measure { right: 17%; top: 36%; }
+@media (min-width: 701px) {
+  .atelier-sequence .atelier-frame { min-height: 700px; }
+  .atelier-sequence .atelier-photograph { inset: 0 -8% 15% 20%; }
+  .atelier-sequence .atelier-frame:first-of-type { margin-top: -120px; }
+  .atelier-sequence .atelier-scene-heading { top: 22%; }
+  .atelier-sequence .atelier-scene-copy { bottom: 22%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atelier-region .atelier-frame, .atelier-region .atelier-photograph, .atelier-region .atelier-data, .atelier-region .atelier-measure { animation: none; transform: none; transition: none; }
+}

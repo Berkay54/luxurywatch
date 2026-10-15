@@ -1,0 +1,160 @@
+/* Phase 3 is isolated: no global or previous-chapter selectors. */
+.collection-scene { position: relative; isolation: isolate; overflow: clip; min-height: 850px; height: 105svh; max-height: 1250px; background: var(--background); color: var(--text); }
+.collection-chapter { position: absolute; inset: 5% 7.7% auto; display: flex; justify-content: space-between; color: var(--secondary); font: 400 9px/1.6 var(--sans); letter-spacing: .18em; }
+.collection-chapter > span:first-child > span { margin-inline: 10px; }
+.collection-statement { position: absolute; z-index: 3; left: 7.4%; top: 13%; margin: 0; font: 400 clamp(44px, 5.1vw, 96px)/.95 var(--display); letter-spacing: -.035em; }
+.collection-statement > span { margin-left: .35em; }
+.collection-index { position: absolute; z-index: 4; top: 43%; left: 7.7%; width: 22%; max-width: 350px; }
+.collection-index button { display: flex; align-items: baseline; gap: 18px; width: 100%; padding: 22px 0; text-align: left; border-top: 1px solid rgb(196 198 199 / .17); color: var(--secondary); font: 400 12px/1.4 var(--sans); letter-spacing: .1em; transition: color 250ms; }
+.collection-index button:hover, .collection-index button[aria-pressed="true"] { color: var(--text); }
+.collection-index button[aria-pressed="true"] { border-top-color: var(--silver); }
+.collection-index-number { font: 400 9px/1.4 var(--sans); letter-spacing: .1em; color: var(--secondary); }
+.collection-index small { display: block; margin-top: 8px; color: var(--secondary); font: 400 7px/1.6 var(--sans); letter-spacing: .15em; }
+.collection-index-mark { margin-left: auto; opacity: 0; }
+.collection-index button[aria-pressed="true"] .collection-index-mark { opacity: 1; }
+.collection-scene button:focus-visible { outline: 1px solid var(--silver); outline-offset: 5px; }
+.collection-exhibit { position: absolute; inset: 9% 5% 17% 30%; }
+.collection-backtype { position: absolute; z-index: 0; top: calc(46% - .5em); left: 53%; transform: translateX(-50%); white-space: nowrap; color: var(--text); font: 400 clamp(80px, 11.3vw, 220px)/1 var(--display); letter-spacing: -.045em; }
+@media (min-width: 1024px) { .collection-backtype[data-model="2"] { font-size: clamp(80px, 13.4vw, 240px); } }
+.collection-object { position: absolute; z-index: 1; inset: 0; }
+.collection-product { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; padding: 6% 8%; }
+.collection-object-number { position: absolute; z-index: 2; right: 2%; bottom: 8%; font: 400 clamp(65px, 7vw, 130px)/1 var(--display); letter-spacing: -.05em; }
+.collection-object-number .collection-counter-total { display: inline-block; vertical-align: baseline; margin-left: 14px; color: var(--secondary); font: 400 9px var(--sans); letter-spacing: .15em; }
+.collection-information { position: absolute; z-index: 4; left: 38%; right: 7.7%; bottom: 8%; }
+.collection-model-kind { margin: 0 0 12px; color: var(--secondary); font: 400 8px/1.6 var(--sans); letter-spacing: .2em; }
+.collection-information h3 { margin: 0; font: 400 clamp(32px, 3.2vw, 58px)/1 var(--display); letter-spacing: -.025em; }
+.collection-information h3 > span { color: var(--silver); }
+.collection-technical { display: flex; gap: clamp(26px, 4vw, 80px); margin: 22px 0 0; padding-top: 18px; border-top: 1px solid rgb(196 198 199 / .22); }
+.collection-technical > div { display: flex; flex-direction: column; gap: 7px; }
+.collection-technical dt { order: 2; color: var(--secondary); font: 400 7px/1.6 var(--sans); letter-spacing: .13em; }
+.collection-technical dd { margin: 0; font: 400 11px/1.4 var(--sans); letter-spacing: .06em; }
+.collection-discover { position: absolute; left: 7.7%; bottom: 10%; display: flex; gap: 24px; align-items: center; padding: 14px 0; border-bottom: 1px solid #555655; font: 400 8px/1.5 var(--sans); letter-spacing: .16em; }
+.collection-discover span { font-size: 23px; line-height: .8; }
+.collection-discover:hover { border-color: var(--text); }
+.collection-footnote { position: absolute; left: 7.7%; bottom: 3.5%; margin: 0; color: var(--secondary); font: 400 7px/1.9 var(--sans); letter-spacing: .13em; }
+.collection-error { position: absolute; z-index: 5; left: 38%; bottom: 2%; max-width: 75%; color: var(--secondary); font: 400 11px/1.5 var(--sans); }
+/* One 1000ms studio sequence. Direction changes the diagonal mask, never
+   the product's final position. Images are already decoded before it starts. */
+.collection-forward { --collection-reveal: polygon(0 0, 100% 0, 100% -18%, 0 0); --collection-dismiss: polygon(0 100%, 100% 118%, 100% 100%, 0 100%); }
+.collection-backward { --collection-reveal: polygon(0 118%, 100% 100%, 100% 100%, 0 100%); --collection-dismiss: polygon(0 0, 100% 0, 100% -18%, 0 0); }
+.collection-product-arriving { animation: collection-arrive 800ms 200ms cubic-bezier(.19,.65,.25,1) both; }
+.collection-product-leaving { animation: collection-depart 430ms cubic-bezier(.45,0,.65,1) both; }
+@keyframes collection-arrive { from { opacity: 0; transform: translateY(16px) scale(.972); clip-path: var(--collection-reveal); } 30% { opacity: .88; } to { opacity: 1; transform: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); } }
+@keyframes collection-depart { 0% { opacity: 1; transform: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); } 65% { opacity: .5; } 100% { opacity: 0; transform: translateY(-8px) scale(1.025); clip-path: var(--collection-dismiss); } }
+.collection-type-leaving { animation: collection-type-out 340ms cubic-bezier(.4,0,.7,1) both; }
+.collection-type-arriving { animation: collection-type-in 840ms 120ms cubic-bezier(.19,.65,.25,1) both; }
+@keyframes collection-type-out { to { opacity: 0; translate: 0 -8px; clip-path: inset(0 0 100%); } }
+@keyframes collection-type-in { from { opacity: 0; translate: 0 10px; clip-path: inset(100% 0 0); } to { opacity: 1; translate: none; clip-path: inset(0); } }
+.collection-counter-face { display: block; white-space: nowrap; }
+.collection-counter-face.collection-copy-arriving, .collection-info-copy.collection-copy-arriving { position: absolute; inset: 0; }
+.collection-counter-face.collection-copy-leaving, .collection-info-copy.collection-copy-leaving { animation: collection-copy-out 260ms ease both; }
+.collection-counter-face.collection-copy-arriving { animation: collection-copy-in 540ms 400ms cubic-bezier(.19,.65,.25,1) both; }
+.collection-info-copy.collection-copy-arriving > * { animation: collection-copy-in 540ms 340ms cubic-bezier(.19,.65,.25,1) both; }
+.collection-info-copy.collection-copy-arriving > h3 { animation-delay: 390ms; }
+.collection-info-copy.collection-copy-arriving > .collection-technical { animation-delay: 440ms; }
+@keyframes collection-copy-out { to { opacity: 0; transform: translateY(-6px); clip-path: inset(0 0 100%); } }
+@keyframes collection-copy-in { from { opacity: 0; transform: translateY(10px); clip-path: inset(100% 0 0); } to { opacity: 1; transform: none; clip-path: inset(0); } }
+/* Transient, neutral illumination behind the object. Removed with the reveal;
+   there is no resting light graphic and no filter on the watch image. */
+.collection-studio-light { position: absolute; z-index: -1; inset: 10% 16%; pointer-events: none; background: radial-gradient(ellipse at 45% 50%, rgb(196 198 199 / .12), transparent 66%); animation: collection-light 1000ms ease both; }
+@keyframes collection-light { 0%, 100% { opacity: 0; } 40% { opacity: .38; } }
+.collection-ready .collection-statement, .collection-ready .collection-exhibit, .collection-ready .collection-index, .collection-ready .collection-information { opacity: 0; translate: 0 12px; transition: opacity 1000ms ease, translate 1100ms cubic-bezier(.22,.61,.36,1); }
+.collection-entered .collection-statement, .collection-entered .collection-exhibit, .collection-entered .collection-index, .collection-entered .collection-information { opacity: 1; translate: none; }
+.collection-entered .collection-exhibit { transition-delay: 100ms; }
+.collection-entered .collection-information { transition-delay: 180ms; }
+.collection-dialog { width: min(850px, 90vw); max-height: 88svh; padding: 0; border: 1px solid #303232; background: var(--background); color: var(--text); }
+.collection-dialog::backdrop { background: rgb(1 1 2 / .88); }
+.collection-register { position: relative; padding: clamp(28px, 5vw, 65px); }
+.collection-dialog-close { display: flex; align-items: center; gap: 18px; margin: 0 0 40px auto; font: 400 9px var(--sans); letter-spacing: .15em; }
+.collection-dialog-close span { font-size: 22px; }
+.collection-register h2 { margin: 0 0 35px; font: 400 clamp(36px, 5vw, 65px)/1 var(--display); letter-spacing: -.03em; }
+.collection-register-models button { display: flex; align-items: baseline; gap: 20px; width: 100%; padding: 23px 0; border-top: 1px solid #303232; text-align: left; font: 400 clamp(12px, 2vw, 19px) var(--sans); letter-spacing: .06em; }
+.collection-register-models small { display: block; margin-top: 10px; color: var(--secondary); font: 400 8px/1.8 var(--sans); letter-spacing: .08em; }
+.collection-register-models button > span:last-child { margin-left: auto; }
+@media (min-width: 701px) and (max-width: 1023px) {
+  .collection-backtype { top: calc(50% - .5em); left: 47.5%; font-size: 14.2vw; }
+  .collection-backtype[data-model="2"] { font-size: 19vw; }
+  .collection-scene { height: 100svh; min-height: 850px; }
+  .collection-chapter { inset-inline: 6%; }
+  .collection-statement { left: 6%; top: 14%; font-size: 6.2vw; }
+  .collection-index { left: 6%; width: 27%; top: 42%; }
+  .collection-index button { font-size: 10px; gap: 12px; }
+  .collection-exhibit { inset: 17% 0 24% 29%; }
+  .collection-product { padding: 0 3%; }
+  .collection-object-number { right: 8%; bottom: 0; }
+  .collection-information { left: 38%; right: 6%; bottom: 7%; }
+  .collection-technical { gap: 22px; }
+  .collection-discover { left: 6%; bottom: 14%; font-size: 7px; gap: 12px; }
+  .collection-footnote { left: 6%; bottom: 7%; font-size: 6px; }
+}
+@media (max-width: 700px) {
+  .collection-scene { height: auto; min-height: 0; max-height: none; padding: 30px 7vw 36px; display: flex; flex-direction: column; }
+  .collection-chapter { position: static; font-size: 8px; }
+  .collection-statement { position: static; margin-top: 30px; font-size: clamp(38px, 10vw, 65px); line-height: .97; }
+  .collection-statement > span { margin-left: .4em; }
+  .collection-exhibit { position: relative; inset: auto; height: clamp(310px, 90vw, 530px); margin: -4px -7vw 0; }
+  .collection-backtype { top: 2%; left: 50%; font-size: 18vw; }
+  .collection-product { padding: 16px 11vw; }
+  .collection-object-number { right: 7%; bottom: 5%; font-size: 63px; }
+  .collection-object-number .collection-counter-total { font-size: 7px; margin-left: 8px; }
+  .collection-information { position: static; margin-top: 12px; }
+  .collection-information h3 { font-size: clamp(32px, 8.8vw, 50px); }
+  .collection-model-kind { font-size: 7px; margin-bottom: 8px; }
+  .collection-technical { justify-content: space-between; gap: 12px; margin-top: 18px; padding-top: 15px; }
+  .collection-technical dd { font-size: 10px; }
+  .collection-technical dt { font-size: 6px; }
+  .collection-index { position: static; order: 5; display: flex; gap: 18px; width: 100%; max-width: none; margin-top: 28px; }
+  .collection-index button { width: auto; flex: 1; padding: 14px 0; justify-content: center; gap: 0; min-height: 48px; }
+  .collection-index button > span:nth-child(2), .collection-index-mark { display: none; }
+  .collection-index-number { font-size: 11px; }
+  .collection-index button[aria-pressed="true"] .collection-index-number { color: var(--text); }
+  .collection-discover { position: static; order: 6; align-self: flex-start; margin-top: 18px; font-size: 8px; }
+  .collection-footnote { display: none; }
+  .collection-error { position: static; order: 7; max-width: none; margin: 14px 0 0; font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .collection-scene .collection-statement, .collection-scene .collection-exhibit, .collection-scene .collection-index, .collection-scene .collection-information { opacity: 1; translate: none; transition: none; }
+  .collection-scene .collection-product { animation: none; transform: none; clip-path: none; }
+  .collection-scene .collection-type-arriving, .collection-scene .collection-type-leaving, .collection-scene .collection-copy-arriving, .collection-scene .collection-copy-leaving, .collection-scene .collection-copy-arriving > * { animation: none; translate: none; transform: none; clip-path: none; }
+  .collection-scene .collection-studio-light { display: none; }
+  /* Override the existing global reduced-motion reset only for a clean,
+     140ms opacity dissolve. No mask, scale or displacement survives. */
+  .collection-switch-reduced .collection-product, .collection-switch-reduced .collection-backtype, .collection-switch-reduced .collection-copy-leaving, .collection-switch-reduced .collection-copy-arriving { transition: opacity 140ms ease !important; }
+  .collection-switch-reduced .collection-product-leaving, .collection-switch-reduced .collection-type-leaving, .collection-switch-reduced .collection-copy-leaving { opacity: 0; }
+  .collection-switch-reduced .collection-product-arriving, .collection-switch-reduced .collection-type-arriving, .collection-switch-reduced .collection-copy-arriving { opacity: 1; }
+  @starting-style {
+    .collection-switch-reduced .collection-product-arriving, .collection-switch-reduced .collection-type-arriving, .collection-switch-reduced .collection-copy-arriving { opacity: 0; }
+  }
+}
+
+/* A single ivory typographic object, always behind the clean product PNG.
+   Eight shallow offset surfaces provide matte depth without shadows/filters. */
+.collection-exhibit { --name-depth-step: .85px; }
+.collection-name-material { display: block; position: relative; transform: translate(calc(var(--collection-pointer-x, 0) * 1.5px), calc(var(--collection-pointer-y, 0) * 1.5px)); transition: transform 300ms cubic-bezier(.22,.61,.36,1); }
+.collection-name-face { display: block; position: relative; z-index: 1; color: var(--text); }
+.collection-name-slice { position: absolute; inset: 0; transform-origin: 0 0; transform: perspective(1600px) translate3d(calc(var(--name-slice) * var(--name-depth-step)), calc(var(--name-slice) * var(--name-depth-step)), calc(var(--name-slice) * -.1px)); }
+.collection-name-slice-1 { --name-slice: 1; color: #777c79; }
+.collection-name-slice-2 { --name-slice: 2; color: #555b58; }
+.collection-name-slice-3 { --name-slice: 3; color: #3d4341; }
+.collection-name-slice-4 { --name-slice: 4; color: #2b302f; }
+.collection-name-slice-5 { --name-slice: 5; color: #202524; }
+.collection-name-slice-6 { --name-slice: 6; color: #171c1b; }
+.collection-name-slice-7 { --name-slice: 7; color: #101413; }
+.collection-name-slice-8 { --name-slice: 8; color: #090c0b; }
+.collection-type-leaving .collection-name-material { animation: collection-name-retreat 340ms cubic-bezier(.4,0,.7,1) both; }
+.collection-type-arriving .collection-name-material { animation: collection-name-resolve 840ms 120ms cubic-bezier(.19,.65,.25,1) both; }
+@keyframes collection-name-retreat { to { transform: perspective(1600px) translateZ(-12px); } }
+@keyframes collection-name-resolve { from { transform: perspective(1600px) translateZ(-16px); opacity: .5; } to { transform: none; opacity: 1; } }
+.collection-object { translate: calc(var(--collection-pointer-x, 0) * 3px) calc(var(--collection-pointer-y, 0) * 3px); transition: translate 300ms cubic-bezier(.22,.61,.36,1); }
+.collection-object-number { z-index: 3; }
+.collection-scene.collection-switching .collection-object { translate: none; transition: none; }
+@media (min-width: 701px) and (max-width: 1023px) { .collection-exhibit { --name-depth-step: .55px; } }
+@media (max-width: 700px) { .collection-exhibit { --name-depth-step: .25px; } }
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .collection-scene .collection-name-material { transform: none; transition: none; }
+  .collection-scene .collection-object { translate: none; transition: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .collection-scene .collection-name-material { animation: none; translate: none; }
+  .collection-scene .collection-type-arriving, .collection-scene .collection-type-leaving { transform: translateX(-50%); }
+}

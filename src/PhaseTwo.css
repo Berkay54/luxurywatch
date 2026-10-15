@@ -1,56 +1,93 @@
-/* Phase 2 only. The approved hero remains unchanged. */
-.phase-two { color: var(--text); background: var(--background); overflow: clip; }
-.cinematic-scene { position: relative; isolation: isolate; }
-.scene-editorial { position: relative; padding-left: 7.7vw; padding-right: 20px; }
-.scene-label { margin: 0 0 36px; color: var(--secondary); font: 400 10px/1.6 var(--sans); letter-spacing: .18em; }
-.scene-label span { margin-inline: 8px; }
-.phase-two h2 { margin: 0; font-family: var(--display); font-weight: 400; letter-spacing: -.035em; }
-.scene-copy { max-width: 320px; margin: 36px 0 0 5px; color: var(--secondary); font: 400 14px/1.85 var(--sans); }
-.skeleton-scene { min-height: clamp(620px, 55vw, 920px); margin-top: 0; display: flex; align-items: center; }
-.cinematic-film { position: absolute; z-index: -1; pointer-events: none; }
-.cinematic-film video { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.cinematic-film-skeleton { right: -4%; top: 0; width: 85%; height: 100%; }
-.cinematic-film-skeleton video { object-position: 0% 50%; }
-.cinematic-film-skeleton::after { content: ''; position: absolute; inset: 0; background:
-  linear-gradient(to right, #010102, rgb(1 1 2 / .55) 2%, rgb(1 1 2 / .12) 7%, rgb(1 1 2 / .02) 14%, rgb(1 1 2 / 0) 23%),
-  linear-gradient(to left, #010102, rgb(1 1 2 / .25) 1%, rgb(1 1 2 / .04) 5%, rgb(1 1 2 / 0) 12%),
-  linear-gradient(to bottom, #010102, rgb(1 1 2 / .18) 1%, rgb(1 1 2 / .03) 4%, rgb(1 1 2 / 0) 9%),
-  linear-gradient(to top, #010102, rgb(1 1 2 / .15) 1%, rgb(1 1 2 / .02) 5%, rgb(1 1 2 / 0) 12%); }
-.skeleton-editorial { width: 39%; padding-block: 55px; }
-.skeleton-editorial h2 { font-size: clamp(43px, 4.35vw, 78px); line-height: .98; }
-.skeleton-editorial h2 span { display: inline-block; margin-left: .15em; }
-.skeleton-editorial .scene-copy { max-width: 260px; }
-.cinematic-fallback { position: absolute; inset: 0; display: grid; place-items: center; background: var(--background); color: var(--secondary); font: 400 24px var(--display); }
-.precision-rail { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0 7.7vw 80px; padding-block: 36px; border-block: 1px solid rgb(196 198 199 / .14); }
-.precision-spec { display: flex; flex-direction: column; gap: 17px; padding-inline: 35px; border-left: 1px solid rgb(196 198 199 / .12); }
-.precision-spec:first-child { border-left: 0; padding-left: 0; }
-.precision-spec dd { margin: 0; font: 400 clamp(38px, 3.9vw, 64px)/1 var(--display); letter-spacing: -.02em; font-variant-numeric: lining-nums tabular-nums; }
-.precision-spec dt { order: 2; color: var(--secondary); font: 400 9px/1.6 var(--sans); letter-spacing: .15em; }
-@media (max-width: 1023px) {
-  .scene-editorial { padding-left: 6vw; }
-  .scene-copy { max-width: 245px; font-size: 13px; }
-  .skeleton-scene { min-height: 530px; }
-  .skeleton-editorial { width: 43%; }
-  .skeleton-editorial h2 { font-size: clamp(35px, 4.5vw, 46px); }
-  .precision-rail { margin-inline: 6vw; }
-  .precision-spec { padding-inline: 20px; }
-  .precision-spec dt { font-size: 8px; }
+﻿/* A self-contained editorial scene. All selectors are scoped to Phase 2. */
+.movement-scene { position: relative; isolation: isolate; height: 110svh; min-height: 780px; max-height: 1320px; overflow: clip; background: var(--background); color: var(--text); }
+.movement-index { position: absolute; inset: 5% 7.7vw auto; display: flex; justify-content: space-between; color: var(--secondary); font: 400 9px/1.6 var(--sans); letter-spacing: .18em; }
+.movement-index > span:first-child > span { margin-inline: 10px; }
+.movement-index > span:last-child { font-size: 8px; letter-spacing: .2em; }
+.movement-title { --type-depth-step: .75px; --type-perspective: 1400px; margin: 0; font: 400 clamp(80px, 12.1vw, 230px)/.85 var(--display); letter-spacing: -.045em; }
+.movement-engineered, .movement-endure { position: absolute; display: block; white-space: nowrap; }
+.movement-engineered { z-index: 0; top: 13%; left: 7.1%; }
+.movement-endure { z-index: 0; bottom: 26%; right: 7.7%; }
+/* Registered type planes: the terminal D returns in front; a small upper
+   portion of ENDURE passes behind the mechanism. Each plane carries its own depth. */
+.movement-engineered.movement-type-front { z-index: 3; clip-path: inset(0 0 0 88%); }
+.movement-endure.movement-type-front { z-index: 3; clip-path: polygon(0 0, 39% 0, 46% 58%, 51% 50%, 45% 0, 100% 0, 100% 100%, 0 100%); }
+/* Matte depth, lit from the upper left. Twelve closely spaced vector-text
+   slices recede down/right; the face alone determines the original layout.
+   A shared projection distance gives tiny foreshortening to the rear slices,
+   without rotating or scaling the ivory face. */
+.movement-type-face { position: relative; z-index: 1; display: block; color: var(--text); }
+.movement-type-slice { position: absolute; z-index: 0; inset: 0; pointer-events: none; transform-origin: 0 0; transform: perspective(var(--type-perspective)) translate3d(calc(var(--slice) * var(--type-depth-step)), calc(var(--slice) * var(--type-depth-step)), calc(var(--slice) * -.08px)); }
+.movement-type-slice-1 { --slice: 1; color: #686c67; }
+.movement-type-slice-2 { --slice: 2; color: #5b605b; }
+.movement-type-slice-3 { --slice: 3; color: #505550; }
+.movement-type-slice-4 { --slice: 4; color: #484d49; }
+.movement-type-slice-5 { --slice: 5; color: #444947; }
+.movement-type-slice-6 { --slice: 6; color: #363b3a; }
+.movement-type-slice-7 { --slice: 7; color: #2b302f; }
+.movement-type-slice-8 { --slice: 8; color: #222625; }
+.movement-type-slice-9 { --slice: 9; color: #1b1e1e; }
+.movement-type-slice-10 { --slice: 10; color: #151818; }
+.movement-type-slice-11 { --slice: 11; color: #101313; }
+.movement-type-slice-12 { --slice: 12; color: #0b0e0f; }
+/* The body settles first; the clean face follows by just four pixels. */
+.movement-ready .movement-type-face { transform: translateY(4px); transition: transform 1000ms cubic-bezier(.22,.61,.36,1) 180ms; }
+.movement-entered .movement-type-face { transform: none; }
+.movement-object { position: absolute; z-index: 1; top: 19%; left: 27%; width: 67%; height: 60%; pointer-events: none; overflow: hidden; mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 48%, rgb(0 0 0 / .96) 62%, rgb(0 0 0 / .6) 78%, transparent 100%); }
+.movement-object video { position: absolute; width: 155%; height: 115%; left: -55%; top: -7%; object-fit: cover; object-position: 75% 50%; }
+.movement-note { position: absolute; z-index: 2; top: 43%; left: 7.7%; color: var(--secondary); }
+.movement-note-number { display: block; margin-bottom: 20px; color: var(--silver); font: 400 10px/1 var(--sans); letter-spacing: .12em; }
+.movement-note p { margin: 0; font: 400 12px/1.9 var(--sans); }
+.movement-detail { position: absolute; z-index: 3; right: 7.7%; bottom: 20%; margin: 0; text-align: right; color: var(--silver); font: 400 8px/1.9 var(--sans); letter-spacing: .17em; }
+.movement-detail span { color: var(--secondary); }
+.movement-rail { position: absolute; z-index: 3; inset: auto 7.7% 4%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin: 0; padding-top: 24px; border-top: 1px solid rgb(196 198 199 / .25); }
+.movement-spec { display: flex; flex-direction: column; gap: 12px; }
+.movement-spec dt { order: 2; font: 400 8px/1.5 var(--sans); letter-spacing: .17em; color: var(--secondary); }
+.movement-spec dd { margin: 0; font: 400 clamp(32px, 3.3vw, 58px)/1 var(--display); letter-spacing: -.025em; font-variant-numeric: lining-nums tabular-nums; }
+.movement-fallback { position: absolute; inset: 0; display: grid; place-items: center; color: var(--secondary); font: 400 16px var(--display); }
+/* One entrance, followed by natural video motion. No scroll-bound playback. */
+.movement-ready .movement-engineered, .movement-ready .movement-endure, .movement-ready .movement-note, .movement-ready .movement-detail, .movement-ready .movement-spec { opacity: 0; transform: translateY(16px); transition: opacity 900ms ease, transform 1100ms cubic-bezier(.22,.61,.36,1); }
+.movement-ready .movement-engineered { transform: translateY(6px); transition-duration: 900ms, 900ms; }
+.movement-ready .movement-endure { transform: translateY(6px); transition-duration: 900ms, 900ms; }
+.movement-ready .movement-type-front { transform: translateY(20px); transition-duration: 900ms, 1100ms; }
+.movement-ready .movement-object { opacity: 0; transform: translateY(12px); transition: opacity 1400ms ease, transform 1200ms cubic-bezier(.22,.61,.36,1); }
+.movement-entered .movement-engineered, .movement-entered .movement-endure, .movement-entered .movement-note, .movement-entered .movement-detail, .movement-entered .movement-spec, .movement-entered .movement-object { opacity: 1; transform: none; }
+.movement-entered .movement-endure { transition-delay: 140ms; }
+.movement-entered .movement-note, .movement-entered .movement-detail { transition-delay: 240ms; }
+.movement-entered .movement-spec:nth-child(2) { transition-delay: 80ms; }
+.movement-entered .movement-spec:nth-child(3) { transition-delay: 160ms; }
+.movement-entered .movement-spec:nth-child(4) { transition-delay: 240ms; }
+@media (min-width: 1800px) { .movement-title { font-size: min(12.1vw, 270px); } }
+@media (min-width: 701px) and (max-width: 1023px) {
+  .movement-title { --type-depth-step: .5px; }
+  .movement-scene { height: 100svh; min-height: 740px; max-height: 1000px; }
+  .movement-index { inset-inline: 6%; }
+  .movement-engineered { top: 17%; left: 5.5%; }
+  .movement-endure { right: 6%; bottom: 30%; }
+  .movement-object { top: 23%; left: 22%; width: 78%; height: 51%; }
+  .movement-note { top: 39%; left: 6%; }
+  .movement-note p { font-size: 10px; }
+  .movement-detail { right: 6%; bottom: 23%; }
+  .movement-rail { inset-inline: 6%; bottom: 6%; }
 }
 @media (max-width: 700px) {
-  .scene-editorial { padding-inline: 7vw; }
-  .scene-label { margin-bottom: 30px; font-size: 9px; }
-  .skeleton-scene { min-height: 620px; display: block; }
-  .skeleton-editorial { width: 100%; padding-top: 24px; padding-bottom: 0; z-index: 1; }
-  .skeleton-editorial .scene-label { margin-bottom: 24px; }
-  .skeleton-editorial h2 { font-size: clamp(37px, 10.3vw, 64px); }
-  .skeleton-editorial .scene-copy { max-width: 230px; margin-top: 24px; }
-  /* The statement occupies the top negative space of one continuous scene;
-     the watch begins behind its lower edge, rather than in a separate block. */
-  .cinematic-film-skeleton { right: -8%; top: 126px; width: 112%; height: 424px; }
-  .cinematic-film-skeleton video { object-position: 65% 50%; }
-  .skeleton-editorial .scene-copy { position: absolute; top: 565px; left: 7vw; margin: 0; max-width: 270px; }
-  .precision-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 8px 7vw 60px; padding-block: 30px; row-gap: 34px; }
-  .precision-spec { padding-inline: 20px; gap: 12px; }
-  .precision-spec:nth-child(3) { padding-left: 0; border-left: 0; }
-  .precision-spec dd { font-size: 40px; }
+  .movement-scene { height: auto; min-height: 0; max-height: none; padding: 28px 7vw 40px; display: grid; grid-template-columns: 1fr; }
+  .movement-index { position: relative; inset: auto; font-size: 8px; }
+  .movement-index > span:last-child { display: none; }
+  .movement-title { --type-depth-step: .28px; font-size: clamp(37px, 12.1vw, 84px); line-height: .92; }
+  .movement-engineered { top: 87px; left: 6.5%; }
+  .movement-endure { top: clamp(285px, 80vw, 510px); bottom: auto; right: 7%; font-size: 1.15em; }
+  .movement-object { position: relative; top: auto; left: -5%; width: 110%; height: clamp(290px, 83vw, 510px); margin-top: 55px; }
+  .movement-object video { width: 155%; height: 110%; top: -5%; }
+  .movement-note { position: relative; inset: auto; margin-top: 16px; display: flex; align-items: baseline; gap: 20px; }
+  .movement-note-number { margin: 0; font-size: 9px; }
+  .movement-note p { font-size: 11px; line-height: 1.8; }
+  .movement-detail { display: none; }
+  .movement-rail { position: relative; inset: auto; margin-top: 30px; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 26px; padding-top: 24px; }
+  .movement-spec { gap: 10px; }
+  .movement-spec dd { font-size: clamp(34px, 8.5vw, 48px); }
+  .movement-spec dt { font-size: 7px; letter-spacing: .13em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .movement-scene .movement-type-face { transform: none; transition: none; }
+  .movement-scene .movement-engineered, .movement-scene .movement-endure, .movement-scene .movement-note, .movement-scene .movement-detail, .movement-scene .movement-spec, .movement-scene .movement-object { opacity: 1; transform: none; transition: none; }
 }

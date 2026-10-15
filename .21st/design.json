@@ -2,7 +2,7 @@
     "version":  1,
     "project":  {
                     "name":  "luxury-watch",
-                    "productType":  "luxury mechanical watch brand, phases 1 and 2",
+                    "productType":  "luxury mechanical watch brand, five editorial chapters",
                     "stack":  [
                                   "react",
                                   "vite"
@@ -53,7 +53,7 @@
                    "motion":  {
 
                               },
-                   "density":  "sparse"
+                   "density":  "editorial"
                },
     "components":  {
                        "installed":  [
@@ -71,22 +71,30 @@
                                      "Preserve approved hero exactly",
                                      "Render skeleton video only in Phase 2",
                                      "Maintain #010102 environment",
-                                     "Respect reduced motion"
+                                     "Respect reduced motion",
+                                     "Preserve approved Movement and Collection exactly",
+                                     "Preserve approved Atelier exactly"
                                  ],
                         "avoid":  [
-                                      "Philosophy section or oversized imprint",
-                                      "Gold video, macro still, placeholders",
-                                      "Cards, scroll effects or unnecessary gaps",
-                                      "Additional sections"
+                                      "Gold video",
+                                      "Cards, glass panels or decorative gradients",
+                                      "Scroll-jacking or scroll-controlled playback",
+                                      "Changes to approved hero",
+                                      "Additional chapters without an explicit brief"
                                   ]
                     },
     "decisions":  [
                       "Phase 1 hero is approved, locked and unchanged",
-                      "Phase 2 contains only 01 — THE MOVEMENT and the specification rail",
-                      "Movement begins directly after hero with no gap",
-                      "85 percent desktop video canvas with full-height crop and natural negative space for typography",
-                      "Only skeleton video rendered; autoplay muted loop inline, reduced motion paused frame",
-                      "Philosophy section and all associated styles removed"
+                      "Phase 2 Movement and Phase 3 Collection are approved and locked",
+                      "Movement begins directly after hero; four specifications integrated inside the scene",
+                      "Skeleton video only; autoplay muted loop inline at normal speed; reduced motion paused frame",
+                      "One native IntersectionObserver entrance; no dependencies, parallax or scroll-controlled playback",
+                      "Mobile central detail and two-column data rail replace desktop positioning",
+                      "Phase 4 Atelier is approved and locked with Phases 1–3",
+                      "Atelier uses timed native CSS mask transitions, with non-sticky tablet/mobile/short-view/reduced-motion sequence",
+                      "Phase 5 closing pending final visual approval: flat monumental BEYOND / TIME., restrained signature and footer",
+                      "Closing adds no media or dependency; one clipped entrance with static reduced-motion composition",
+                      "Closing navigation uses existing section anchors and explicit fictional-concept notes for unavailable destinations"
                   ],
     "evidence":  [
                      {
